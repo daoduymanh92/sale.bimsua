@@ -3,7 +3,7 @@
         <div class="container mx-auto">
             <div class="bg-white">
                 <div class="max-w-screen-xl mx-auto px-4">
-                    <div class="font-bold text-xl mb-2">Danh sách đơn hàng</div>
+                    <div class="font-bold text-xl mb-2">Tư vấn hỗ trợ</div>
                     <table class="table-auto">
                         <thead>
                             <tr>
@@ -49,9 +49,7 @@
 <script>
 export default {
     data() {
-        return {
-            isOpen: false
-        };
+        return {};
     }
 };
 </script>

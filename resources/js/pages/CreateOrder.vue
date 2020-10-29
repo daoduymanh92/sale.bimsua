@@ -3,7 +3,9 @@
         <div class="container mx-auto">
             <div class="bg-white">
                 <div class="max-w-screen-xl mx-auto px-4">
-                    <div class="font-bold text-xl mb-2">Thông tin đơn hàng</div>
+                    <div class="font-bold text-xl mb-2">
+                        Thông tin đơn hàng {{ order }} {{ name }}
+                    </div>
                     <form class="w-full">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-1/3 px-3">
@@ -18,6 +20,7 @@
                                     id="grid-first-name"
                                     type="text"
                                     placeholder="Jane"
+                                    v-model="order.name"
                                 />
                                 <!-- <p class="text-red-500 text-xs italic">
                                 Please fill out this field.
@@ -35,6 +38,7 @@
                                     id="grid-last-name"
                                     type="text"
                                     placeholder="0368701515"
+                                    v-model="order.phone"
                                 />
                             </div>
                             <div class="w-full md:w-1/3 px-3">
@@ -48,10 +52,11 @@
                                     <select
                                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         id="grid-state"
+                                        v-model="order.gender"
                                     >
-                                        <option>Chưa xác định</option>
-                                        <option>Trai</option>
-                                        <option>Gái</option>
+                                        <option value="0">Chưa xác định</option>
+                                        <option value="1">Trai</option>
+                                        <option value="2">Gái</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,6 +73,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password"
                                     type="text"
+                                    v-model="order.address"
                                 />
                             </div>
                         </div>
@@ -83,9 +89,10 @@
                                     <select
                                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         id="grid-state"
+                                        v-model="order.payment_method"
                                     >
-                                        <option>COD</option>
-                                        <option>Chuyển khoản</option>
+                                        <option value="1">COD</option>
+                                        <option value="2">Chuyển khoản</option>
                                     </select>
                                 </div>
                             </div>
@@ -102,7 +109,8 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-zip"
                                     rows="4"
-                                /></textarea>
+                                    v-model="order.order_information"
+                                ></textarea>
                             </div>
                             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                                 <label
@@ -115,6 +123,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-zip"
                                     type="text"
+                                    v-model="order.total"
                                 />
                             </div>
                         </div>
@@ -130,6 +139,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password"
                                     type="text"
+                                    v-model="order.facebook"
                                 />
                             </div>
                         </div>
@@ -145,6 +155,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password"
                                     type="text"
+                                    v-model="order.description"
                                 />
                             </div>
                         </div>
@@ -152,6 +163,8 @@
                             <div class="w-full px-3 flex justify-center">
                                 <button
                                     class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                                    v-on:click="create_order(order)"
+                                    type="button"
                                 >
                                     <svg
                                         class="fill-current w-4 h-4 mr-2"
@@ -174,11 +187,31 @@
 </template>
 
 <script>
+import Repository from "../repositories/RepositoryFactory";
+const OrderRepository = Repository.get("orders");
+
 export default {
+    name: "Order",
     data() {
         return {
-            isOpen: false
+            name: "Manh",
+            order: {
+                name: null,
+                phone: null,
+                gender: null,
+                address: null,
+                payment_method: null, // 0 = COD, 1 = BANKING
+                order_information: null,
+                total: null,
+                facebook: null,
+                description: null
+            }
         };
+    },
+    methods: {
+        create_order: async order => {
+            await OrderRepository.create(order);
+        }
     }
 };
 </script>

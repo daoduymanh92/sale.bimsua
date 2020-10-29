@@ -2181,16 +2181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/RepositoryFactory */ "./resources/js/repositories/RepositoryFactory.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2205,8 +2196,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
-var PostRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("posts");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Posts",
@@ -2215,37 +2204,8 @@ var PostRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1_
   data: function data() {
     return {};
   },
-  created: function created() {
-    this.getPosts();
-  },
-  methods: {
-    getPosts: function () {
-      var _getPosts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                data = this.$store.state.post.variable1;
-                this.$store.dispatch("post/fetchVariable1", {
-                  self: this
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getPosts() {
-        return _getPosts.apply(this, arguments);
-      }
-
-      return getPosts;
-    }()
-  }
+  created: function created() {},
+  methods: {}
 });
 
 /***/ }),
@@ -2379,6 +2339,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/RepositoryFactory */ "./resources/js/repositories/RepositoryFactory.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2554,11 +2523,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("orders");
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Order",
   data: function data() {
     return {
-      isOpen: false
+      name: "Manh",
+      order: {
+        name: null,
+        phone: null,
+        gender: null,
+        address: null,
+        payment_method: null,
+        // 0 = COD, 1 = BANKING
+        order_information: null,
+        total: null,
+        facebook: null,
+        description: null
+      }
     };
+  },
+  methods: {
+    create_order: function () {
+      var _create_order = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(order) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return OrderRepository.create(order);
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function create_order(_x) {
+        return _create_order.apply(this, arguments);
+      }
+
+      return create_order;
+    }()
   }
 });
 
@@ -2873,11 +2895,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isOpen: false
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Support.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Support.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
   }
 });
 
@@ -4620,30 +4710,30 @@ var render = function() {
             "a",
             {
               staticClass:
-                "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800",
-              attrs: { href: "#" }
+                "block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800",
+              attrs: { href: "order" }
             },
-            [_vm._v("List your property")]
+            [_vm._v("Tạo đơn")]
           ),
           _vm._v(" "),
           _c(
             "a",
             {
               staticClass:
-                "mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2",
-              attrs: { href: "#" }
+                "mt-1 block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2",
+              attrs: { href: "orders" }
             },
-            [_vm._v("Trips")]
+            [_vm._v("Danh sách")]
           ),
           _vm._v(" "),
           _c(
             "a",
             {
               staticClass:
-                "mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2",
-              attrs: { href: "#" }
+                "mt-1 block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2",
+              attrs: { href: "support" }
             },
-            [_vm._v("Messages")]
+            [_vm._v("Tư vấn")]
           )
         ]
       )
@@ -4727,21 +4817,436 @@ var render = function() {
       _c("div", { staticClass: "bg-white" }, [
         _c("div", { staticClass: "max-w-screen-xl mx-auto px-4" }, [
           _c("div", { staticClass: "font-bold text-xl mb-2" }, [
-            _vm._v("Thông tin đơn hàng")
+            _vm._v(
+              "\n                    Thông tin đơn hàng " +
+                _vm._s(_vm.order) +
+                " " +
+                _vm._s(_vm.name) +
+                "\n                "
+            )
           ]),
           _vm._v(" "),
           _c("form", { staticClass: "w-full" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-first-name" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Tên\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.name,
+                      expression: "order.name"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
+                  attrs: {
+                    id: "grid-first-name",
+                    type: "text",
+                    placeholder: "Jane"
+                  },
+                  domProps: { value: _vm.order.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "name", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-last-name" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                SDT\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.phone,
+                      expression: "order.phone"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: {
+                    id: "grid-last-name",
+                    type: "text",
+                    placeholder: "0368701515"
+                  },
+                  domProps: { value: _vm.order.phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "phone", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-last-name" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Giới tính con\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.order.gender,
+                          expression: "order.gender"
+                        }
+                      ],
+                      staticClass:
+                        "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: { id: "grid-state" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.order,
+                            "gender",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v("Chưa xác định")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("Trai")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [_vm._v("Gái")])
+                    ]
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-password" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Địa chỉ\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.address,
+                      expression: "order.address"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "grid-password", type: "text" },
+                  domProps: { value: _vm.order.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "address", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full md:w-1/4 px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-password" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Loại thanh toán\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.order.payment_method,
+                          expression: "order.payment_method"
+                        }
+                      ],
+                      staticClass:
+                        "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: { id: "grid-state" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.order,
+                            "payment_method",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("COD")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("Chuyển khoản")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(3),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full md:w-3/4 px-3 mb-6 md:mb-0" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-state" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Thông tin đơn hàng\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.order_information,
+                      expression: "order.order_information"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "grid-zip", rows: "4" },
+                  domProps: { value: _vm.order.order_information },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.order,
+                        "order_information",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full md:w-1/4 px-3 mb-6 md:mb-0" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-zip" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Tổng tiền\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.total,
+                      expression: "order.total"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "grid-zip", type: "text" },
+                  domProps: { value: _vm.order.total },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "total", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(4),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-password" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Facebook\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.facebook,
+                      expression: "order.facebook"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "grid-password", type: "text" },
+                  domProps: { value: _vm.order.facebook },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "facebook", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(5),
+            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+              _c("div", { staticClass: "w-full px-3" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+                    attrs: { for: "grid-password" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Thông tin thêm\n                            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.description,
+                      expression: "order.description"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "grid-password", type: "text" },
+                  domProps: { value: _vm.order.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.order, "description", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
               _c("div", { staticClass: "w-full px-3 flex justify-center" }, [
@@ -4749,7 +5254,13 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                      "bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.create_order(_vm.order)
+                      }
+                    }
                   },
                   [
                     _c(
@@ -4781,268 +5292,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-first-name" }
-          },
-          [
-            _vm._v(
-              "\n                                Tên\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
-          attrs: { id: "grid-first-name", type: "text", placeholder: "Jane" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-last-name" }
-          },
-          [
-            _vm._v(
-              "\n                                SDT\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: {
-            id: "grid-last-name",
-            type: "text",
-            placeholder: "0368701515"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-full md:w-1/3 px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-last-name" }
-          },
-          [
-            _vm._v(
-              "\n                                Giới tính con\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "relative" }, [
-          _c(
-            "select",
-            {
-              staticClass:
-                "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-              attrs: { id: "grid-state" }
-            },
-            [
-              _c("option", [_vm._v("Chưa xác định")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Trai")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Gái")])
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-password" }
-          },
-          [
-            _vm._v(
-              "\n                                Địa chỉ\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "grid-password", type: "text" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full md:w-1/4 px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-password" }
-          },
-          [
-            _vm._v(
-              "\n                                Loại thanh toán\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "relative" }, [
-          _c(
-            "select",
-            {
-              staticClass:
-                "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-              attrs: { id: "grid-state" }
-            },
-            [
-              _c("option", [_vm._v("COD")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Chuyển khoản")])
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full md:w-3/4 px-3 mb-6 md:mb-0" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-state" }
-          },
-          [
-            _vm._v(
-              "\n                                Thông tin đơn hàng\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("textarea", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "grid-zip", rows: "4" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-full md:w-1/4 px-3 mb-6 md:mb-0" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-zip" }
-          },
-          [
-            _vm._v(
-              "\n                                Tổng tiền\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "grid-zip", type: "text" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-password" }
-          },
-          [
-            _vm._v(
-              "\n                                Facebook\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "grid-password", type: "text" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-      _c("div", { staticClass: "w-full px-3" }, [
-        _c(
-          "label",
-          {
-            staticClass:
-              "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
-            attrs: { for: "grid-password" }
-          },
-          [
-            _vm._v(
-              "\n                                Thông tin thêm\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-          attrs: { id: "grid-password", type: "text" }
-        })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -5467,78 +5717,250 @@ var staticRenderFns = [
       _c("div", { staticClass: "container mx-auto" }, [
         _c("div", { staticClass: "bg-white" }, [
           _c("div", { staticClass: "max-w-screen-xl mx-auto px-4" }, [
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table-fixed border-collapse border-2 border-gray-500"
-              },
-              [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", { staticClass: "w-1/2 px-4 py-2" }, [
-                      _vm._v("Title")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "w-1/4 px-4 py-2" }, [
-                      _vm._v("Author")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "w-1/4 px-4 py-2" }, [
-                      _vm._v("Views")
-                    ])
+            _c("div", { staticClass: "font-bold text-xl mb-2" }, [
+              _vm._v("Danh sách đơn hàng")
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table-auto" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Tên")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Số điện thoại")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Giới tính")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Địa chỉ")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Loại thanh toán")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Thông tin đơn")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Giá tiền")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Thông tin thêm")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
                   ])
                 ]),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("Intro to CSS")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("Adam")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("858")
-                    ])
+                _c("tr", { staticClass: "bg-gray-100" }, [
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
                   ]),
                   _vm._v(" "),
-                  _c("tr", { staticClass: "bg-gray-100" }, [
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v(
-                        "\n                                A Long and Winding Tour of the History of UI\n                                Frameworks and Tools and the Impact on\n                                Design\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("Adam")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("112")
-                    ])
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
                   ]),
                   _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v(
-                        "\n                                Intro to JavaScript\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("Chris")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v("1,280")
-                    ])
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
                   ])
                 ])
-              ]
-            )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Support.vue?vue&type=template&id=e343ce54&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Support.vue?vue&type=template&id=e343ce54& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("main", [
+      _c("div", { staticClass: "container mx-auto" }, [
+        _c("div", { staticClass: "bg-white" }, [
+          _c("div", { staticClass: "max-w-screen-xl mx-auto px-4" }, [
+            _c("div", { staticClass: "font-bold text-xl mb-2" }, [
+              _vm._v("Tư vấn hỗ trợ")
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table-auto" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Tên")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Số điện thoại")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Giới tính")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Địa chỉ")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Loại thanh toán")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Thông tin đơn")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Giá tiền")]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [
+                    _vm._v("Thông tin thêm")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", { staticClass: "bg-gray-100" }, [
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("858")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Intro to CSS")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border px-4 py-2" }, [
+                    _vm._v("Adam")
+                  ])
+                ])
+              ])
+            ])
           ])
         ])
       ])
@@ -22286,7 +22708,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.vue");
 /* harmony import */ var _pages_CreateOrder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/CreateOrder */ "./resources/js/pages/CreateOrder.vue");
 /* harmony import */ var _pages_OrderList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/OrderList */ "./resources/js/pages/OrderList.vue");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _pages_Support__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/Support */ "./resources/js/pages/Support.vue");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
 // require('./bootstrap');
 
 
@@ -22303,6 +22726,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -22327,6 +22751,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: "/orders",
     name: "orders",
     component: _pages_OrderList__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }, {
+    path: "/support",
+    name: "support",
+    component: _pages_Support__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
 });
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -22335,7 +22763,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     App: _pages_App__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   router: router,
-  store: _store_index__WEBPACK_IMPORTED_MODULE_9__["default"] // Vuex
+  store: _store_index__WEBPACK_IMPORTED_MODULE_10__["default"] // Vuex
 
 });
 
@@ -22877,6 +23305,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/Support.vue":
+/*!****************************************!*\
+  !*** ./resources/js/pages/Support.vue ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Support.vue?vue&type=template&id=e343ce54& */ "./resources/js/pages/Support.vue?vue&type=template&id=e343ce54&");
+/* harmony import */ var _Support_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Support.vue?vue&type=script&lang=js& */ "./resources/js/pages/Support.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Support_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/Support.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Support.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./resources/js/pages/Support.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Support_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Support.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Support.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Support_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/Support.vue?vue&type=template&id=e343ce54&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/pages/Support.vue?vue&type=template&id=e343ce54& ***!
+  \***********************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Support.vue?vue&type=template&id=e343ce54& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Support.vue?vue&type=template&id=e343ce54&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Support_vue_vue_type_template_id_e343ce54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/repositories/RepositoryFactory.js":
 /*!********************************************************!*\
   !*** ./resources/js/repositories/RepositoryFactory.js ***!
@@ -22887,9 +23384,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _postRepository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./postRepository */ "./resources/js/repositories/postRepository.js");
+/* harmony import */ var _orderRepository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orderRepository */ "./resources/js/repositories/orderRepository.js");
+
 
 var repositories = {
-  'posts': _postRepository__WEBPACK_IMPORTED_MODULE_0__["default"]
+  posts: _postRepository__WEBPACK_IMPORTED_MODULE_0__["default"],
+  orders: _orderRepository__WEBPACK_IMPORTED_MODULE_1__["default"]
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get(name) {
@@ -22920,6 +23420,39 @@ var baseURL = "".concat(baseDomain); // Incase of /api/v1;
   headers: {// "Authorization": "Bearer xxxxx"
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/repositories/orderRepository.js":
+/*!******************************************************!*\
+  !*** ./resources/js/repositories/orderRepository.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clients/axiosClient */ "./resources/js/repositories/clients/axiosClient.js");
+
+var resource = "/orders";
+/* harmony default export */ __webpack_exports__["default"] = ({
+  get: function get() {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+  },
+  getPost: function getPost(id) {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource, "/").concat(id));
+  },
+  create: function create(payload) {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(payload, id) {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"].put("".concat(resource, "/").concat(id), payload);
+  },
+  "delete": function _delete(id) {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(id));
+  } // MANY OTHER ENDPOINT RELATED STUFFS
+
+});
 
 /***/ }),
 
@@ -23076,8 +23609,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Development\imageSave\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Development\imageSave\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Development\sale.bimsua\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Development\sale.bimsua\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

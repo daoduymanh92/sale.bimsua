@@ -13,9 +13,6 @@
 </template>
 
 <script>
-import Repository from "../repositories/RepositoryFactory";
-const PostRepository = Repository.get("posts");
-
 import { mapState } from "vuex";
 
 export default {
@@ -25,15 +22,8 @@ export default {
     data() {
         return {};
     },
-    created() {
-        this.getPosts();
-    },
-    methods: {
-        getPosts: async function() {
-            let data = this.$store.state.post.variable1;
-            this.$store.dispatch("post/fetchVariable1", { self: this });
-        }
-    }
+    created() {},
+    methods: {}
 };
 </script>
 <style scoped></style>
