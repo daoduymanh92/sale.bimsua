@@ -5,6 +5,8 @@ namespace App\Repository\Eloquent;
 use App\Repository\EloquentRepositoryInterface; 
 use Illuminate\Database\Eloquent\Model;   
 
+use Carbon\Carbon;
+
 class BaseRepository implements EloquentRepositoryInterface 
 {     
     /**      
@@ -27,9 +29,16 @@ class BaseRepository implements EloquentRepositoryInterface
     *
     * @return Model
     */
-    public function create(array $attributes): Model
+    public function create(array $data)
     {
-        return $this->model->create($attributes);
+        $created_at = Carbon::now()->toDateTimeString();
+        $updated_at = Carbon::now()->toDateTimeString();
+
+        $data['created_at'] = $created_at;
+        $data['updated_at'] = $created_at;
+        
+        $this->model->insert($data);
+        return true;
     }
  
     /**
@@ -39,5 +48,9 @@ class BaseRepository implements EloquentRepositoryInterface
     public function find($id): ?Model
     {
         return $this->model->find($id);
+    }
+
+    public function getList() {
+        return $this->model->get();
     }
 }

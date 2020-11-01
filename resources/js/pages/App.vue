@@ -3,21 +3,23 @@
         <Header />
         <body class="mb-10 mt-20">
             <router-view />
+            <Alert />
         </body>
         <Footer />
     </div>
 </template>
 
 <script>
-import Navbar from "./../components/Navbar";
+import Alert from "./../components/Alert";
+
 import Header from "./../layouts/Header";
 import Footer from "./../layouts/Footer";
 export default {
     name: "app",
     components: {
-        Navbar,
         Header,
-        Footer
+        Footer,
+        Alert
     }
 };
 </script>

@@ -4,7 +4,7 @@
             <div class="bg-white">
                 <div class="max-w-screen-xl mx-auto px-4">
                     <div class="font-bold text-xl mb-2">
-                        Thông tin đơn hàng {{ order }} {{ name }}
+                        Thông tin đơn hàng
                     </div>
                     <form class="w-full">
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -109,7 +109,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-zip"
                                     rows="4"
-                                    v-model="order.order_information"
+                                    v-model="order.information"
                                 ></textarea>
                             </div>
                             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -155,7 +155,7 @@
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password"
                                     type="text"
-                                    v-model="order.description"
+                                    v-model="order.note"
                                 />
                             </div>
                         </div>
@@ -188,6 +188,7 @@
 
 <script>
 import Repository from "../repositories/RepositoryFactory";
+import EventBus from "./../event-bus";
 const OrderRepository = Repository.get("orders");
 
 export default {
@@ -198,19 +199,23 @@ export default {
             order: {
                 name: null,
                 phone: null,
-                gender: null,
+                gender: 0,
                 address: null,
-                payment_method: null, // 0 = COD, 1 = BANKING
-                order_information: null,
+                payment_method: 0, // 0 = COD, 1 = BANKING
+                information: null,
                 total: null,
                 facebook: null,
-                description: null
+                note: null
             }
         };
     },
     methods: {
         create_order: async order => {
-            await OrderRepository.create(order);
+            let response = await OrderRepository.create(order);
+            if ((response.status = 200)) {
+                EventBus.$emit("SHOW_ALERT", true);
+                // this.$emit("display-alert", true);
+            }
         }
     }
 };
