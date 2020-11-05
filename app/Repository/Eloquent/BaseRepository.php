@@ -50,7 +50,13 @@ class BaseRepository implements EloquentRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function getList() {
-        return $this->model->get();
+    public function getList($data) {
+        return $this->model->orderBy('created_at', 'DESC')->where($data)->get();
+    }
+
+    public function update($id, $data) {
+        return $this->model
+                    ->where('id', $id)
+                    ->update($data);
     }
 }

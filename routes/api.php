@@ -23,4 +23,5 @@ Route::get('/test', 'UserController@index');
 Route::prefix('orders')->group(function () {
     Route::get('/', 'Api\OrderController@getList');
     Route::post('/order', 'Api\OrderController@postOrder');
+    Route::put('/{id}', 'Api\OrderController@updateOrder');
 });

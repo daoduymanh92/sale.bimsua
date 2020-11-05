@@ -2,8 +2,10 @@ import Client from "./clients/axiosClient";
 const resource = "/orders";
 
 export default {
-    getList() {
-        return Client.get(`${resource}`);
+    getList(payload) {
+        return Client.get(`${resource}`, {
+            params: payload
+        });
     },
     getPost(id) {
         return Client.get(`${resource}/${id}`);

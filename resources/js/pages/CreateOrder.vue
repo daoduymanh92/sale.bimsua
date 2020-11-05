@@ -189,13 +189,13 @@
 <script>
 import Repository from "../repositories/RepositoryFactory";
 import EventBus from "./../event-bus";
+import swal from "sweetalert";
 const OrderRepository = Repository.get("orders");
 
 export default {
     name: "Order",
     data() {
         return {
-            name: "Manh",
             order: {
                 name: null,
                 phone: null,
@@ -213,8 +213,11 @@ export default {
         create_order: async order => {
             let response = await OrderRepository.create(order);
             if ((response.status = 200)) {
-                EventBus.$emit("SHOW_ALERT", true);
-                // this.$emit("display-alert", true);
+                swal("Bạn tạo đơn thành công.").then(value => {
+                    window.location = "orders";
+                });
+            } else {
+                swal("Có lỗi!", "!", "error");
             }
         }
     }

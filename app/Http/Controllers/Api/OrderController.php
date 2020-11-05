@@ -17,8 +17,9 @@ class OrderController extends Controller
         $this->repository = $repository;
     }
     //
-    public function getList() {
-        $result = $this->repository->getList();
+    public function getList(Request $request) {
+        $data = $request->all();
+        $result = $this->repository->getList($data);
         $data =  OrderResource::collection($result);
         return $this->returnSucess($data);          
     }
@@ -27,5 +28,11 @@ class OrderController extends Controller
         $data = $request->all();
         $rerult = $this->repository->create($data);
         return $this->returnSucess($rerult);     
+    }
+
+    public function updateOrder($id, Request $request) {
+        $data = $request->all();
+        $rerult = $this->repository->update($id, $data);
+        return $this->returnSucess($rerult);  
     }
 }
