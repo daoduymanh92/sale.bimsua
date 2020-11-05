@@ -154,16 +154,34 @@ export default {
         this.orders = response.data.data;
     },
     methods: {
-        getList: async () => {
-            let response = await OrderRepository.getList();
-            this.orders = response.data.data;
+        getList: () => {
+            let response = OrderRepository.getList({
+                delevery_status: 0
+            })
+                .then(response => {
+                    this.orders = response.data.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         changePayment: async function(event, id) {
             let response = await OrderRepository.update(
-                { payment_method: event.target.value },
+                { delevery_status: event.target.value },
                 id
             );
-            console.log(response);
+
+            if (response.status == 200) {
+                let response = OrderRepository.getList({
+                    delevery_status: 0
+                })
+                    .then(response => {
+                        this.orders = response.data.data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         }
     }
 };

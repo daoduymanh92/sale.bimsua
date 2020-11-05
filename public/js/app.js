@@ -2846,19 +2846,42 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
     }))();
   },
   methods: {
-    getList: function () {
-      var _getList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
+    getList: function getList() {
+      var response = OrderRepository.getList({
+        delevery_status: 0
+      }).then(function (response) {
+        _this2.orders = response.data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    changePayment: function () {
+      var _changePayment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(event, id) {
+        var _this3 = this;
+
+        var response, _response;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return OrderRepository.getList();
+                return OrderRepository.update({
+                  delevery_status: event.target.value
+                }, id);
 
               case 2:
                 response = _context2.sent;
-                _this2.orders = response.data.data;
+
+                if (response.status == 200) {
+                  _response = OrderRepository.getList({
+                    delevery_status: 0
+                  }).then(function (response) {
+                    _this3.orders = response.data.data;
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                }
 
               case 4:
               case "end":
@@ -2866,36 +2889,6 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
             }
           }
         }, _callee2);
-      }));
-
-      function getList() {
-        return _getList.apply(this, arguments);
-      }
-
-      return getList;
-    }(),
-    changePayment: function () {
-      var _changePayment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(event, id) {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return OrderRepository.update({
-                  payment_method: event.target.value
-                }, id);
-
-              case 2:
-                response = _context3.sent;
-                console.log(response);
-
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
       }));
 
       function changePayment(_x, _x2) {
