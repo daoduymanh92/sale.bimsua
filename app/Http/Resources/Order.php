@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Model\Order as OrderModel; 
+
 class Order extends JsonResource
 {
     /**
@@ -18,10 +20,10 @@ class Order extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'phone' => $this->phone,
-            'gender' => $this->gender,
+            'gender' => OrderModel::$genderText[$this->gender],
             'address' => $this->address,
-            'payment_method' => "Test",
-            'delevery_status' => $this->delevery_status,
+            'payment_method' => OrderModel::$methodText[$this->payment_method],
+            'delevery_status' => OrderModel::$deliveryText[$this->delevery_status],
             'information' => $this->information,
             'total' => $this->total,
             'facebook' => $this->facebook,

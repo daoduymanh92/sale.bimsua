@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseDomain = "http://127.0.0.1:8000/api/";
+const baseDomain = process.env.MIX_ROOT_API;
 const baseURL = `${baseDomain}`; // Incase of /api/v1;
 
 // ALL DEFUALT CONFIGURATION HERE
