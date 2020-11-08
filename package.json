@@ -23,11 +23,13 @@
         "webpack": "^4.39.3"
     },
     "dependencies": {
+        "moment": "^2.29.1",
         "plyr": "^3.6.2",
         "sweetalert": "^2.1.2",
         "vue": "^2.6.12",
         "vue-plyr": "^6.0.4",
         "vue-router": "^3.4.6",
+        "vuejs-datepicker": "^1.6.2",
         "vuetify": "^2.3.13",
         "vuex": "^3.5.1"
     }

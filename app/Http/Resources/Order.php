@@ -31,6 +31,7 @@ class Order extends JsonResource
             'facebook' => $this->facebook,
             'note' => $this->note,
             'order_by' => $this->order_by,
+            'ship_discount' => OrderModel::$shipText[$this->ship_discount],
             'created_at' => Carbon::parse($this->created_at)->format('d-m-Y'),
             'updated_at' => Carbon::parse($this->updated_at)->format('d-m-Y'),
         ];

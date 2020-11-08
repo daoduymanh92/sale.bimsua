@@ -21,6 +21,7 @@ import Home from "./pages/Home";
 import Order from "./pages/CreateOrder";
 import Orders from "./pages/OrderList";
 import Support from "./pages/Support";
+import Ticket from "./pages/Ticket";
 
 import store from "./store/index";
 
@@ -51,6 +52,11 @@ const router = new VueRouter({
             path: "/support",
             name: "support",
             component: Support
+        },
+        {
+            path: "/tickets",
+            name: "tickets",
+            component: Ticket
         }
     ]
 });

@@ -25,3 +25,8 @@ Route::prefix('orders')->group(function () {
     Route::post('/order', 'Api\OrderController@postOrder');
     Route::put('/{id}', 'Api\OrderController@updateOrder');
 });
+
+// tickets
+Route::prefix('tickets')->group(function () {
+    Route::get('/', 'Api\TicketController@getList');
+});

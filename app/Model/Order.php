@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     //
+    protected $fillable = [
+        'name', 'phone', 'address', 'facebook', 'description', 'gender', 'payment_method', 'delevery_status', 'information', 'total', 'note', 'order_by', 'ship_discount', 'order_type'
+    ];
     protected $table = 'orders';
 
     const COD_METHOD = 0;
@@ -36,5 +39,14 @@ class Order extends Model
         self::DELIVERY_CONFIRM => 'Đã xác nhận đơn',
         self::DELIVERY_SUCCESS => 'Đã giao hàng',
         self::DELIVERY_RETURN => 'Hoàn hàng',
-    ];     
+    ];  
+    
+    // SHIP
+    const SHIP_PAY_BY_CUSTOMER = 0;
+    const SHIP_FREE = 1;
+
+    public static $shipText = [
+        self::SHIP_PAY_BY_CUSTOMER => 'Khách trả',
+        self::SHIP_FREE => 'Miễn phí',
+    ]; 
 }

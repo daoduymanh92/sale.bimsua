@@ -4,11 +4,12 @@
     >
         <div class="flex items-center justify-between px-4 py-3 sm:p-0">
             <div>
-                <img
+                <!-- <img
                     class="h-8"
                     src="https://tailwindui.com/img/tailwindui-logo.svg"
                     alt="Workcation"
-                />
+                /> -->
+                <p class="text-3xl font-black">AnAn</p>
             </div>
             <div class="sm:hidden">
                 <button
@@ -46,7 +47,7 @@
                 >Danh sách</a
             >
             <a
-                href="support"
+                href="tickets"
                 class="mt-1 block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
                 >Tư vấn</a
             >

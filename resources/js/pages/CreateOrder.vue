@@ -8,7 +8,7 @@
                     </div>
                     <form class="w-full">
                         <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full md:w-1/3 px-3">
+                            <div class="w-full md:w-1/4 px-3">
                                 <label
                                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                     for="grid-first-name"
@@ -26,7 +26,7 @@
                                 Please fill out this field.
                             </p> -->
                             </div>
-                            <div class="w-full md:w-1/3 px-3">
+                            <div class="w-full md:w-1/4 px-3">
                                 <label
                                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                     for="grid-last-name"
@@ -41,7 +41,7 @@
                                     v-model="order.phone"
                                 />
                             </div>
-                            <div class="w-full md:w-1/3 px-3">
+                            <div class="w-full md:w-1/4 px-3">
                                 <label
                                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                     for="grid-last-name"
@@ -57,6 +57,24 @@
                                         <option value="0">Chưa xác định</option>
                                         <option value="1">Trai</option>
                                         <option value="2">Gái</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/4 px-3">
+                                <label
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="grid-last-name"
+                                >
+                                    Loại đơn
+                                </label>
+                                <div class="relative">
+                                    <select
+                                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        id="grid-state"
+                                        v-model="order.order_type"
+                                    >
+                                        <option value="0">Tạo đơn</option>
+                                        <option value="1">Tư vấn tiếp</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,8 +109,26 @@
                                         id="grid-state"
                                         v-model="order.payment_method"
                                     >
-                                        <option value="1">COD</option>
-                                        <option value="2">Chuyển khoản</option>
+                                        <option value="0">COD</option>
+                                        <option value="1">Chuyển khoản</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/4 px-3">
+                                <label
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="grid-password"
+                                >
+                                    Phí vận chuyển
+                                </label>
+                                <div class="relative">
+                                    <select
+                                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        id="grid-state"
+                                        v-model="order.ship_discount"
+                                    >
+                                        <option value="0">Khách trả</option>
+                                        <option value="1">Miễn phí</option>
                                     </select>
                                 </div>
                             </div>
@@ -128,7 +164,7 @@
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full px-3">
+                            <div class="w-full md:w-1/4  px-3 mb-6 md:mb-0">
                                 <label
                                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                     for="grid-password"
@@ -142,9 +178,22 @@
                                     v-model="order.facebook"
                                 />
                             </div>
+                            <div class="w-full md:w-1/4  px-3 mb-6 md:mb-0">
+                                <label
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="grid-password"
+                                >
+                                    Dự kiện thời gian CSKH
+                                </label>
+                                <datepicker
+                                    v-model="order.notification_date"
+                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    :format="'yyyy-MM-dd'"
+                                ></datepicker>
+                            </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full px-3">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label
                                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                     for="grid-password"
@@ -190,10 +239,16 @@
 import Repository from "../repositories/RepositoryFactory";
 import EventBus from "./../event-bus";
 import swal from "sweetalert";
+import Datepicker from "vuejs-datepicker";
+import moment from "moment";
+
 const OrderRepository = Repository.get("orders");
 
 export default {
     name: "Order",
+    components: {
+        Datepicker
+    },
     data() {
         return {
             order: {
@@ -202,10 +257,15 @@ export default {
                 gender: 0,
                 address: null,
                 payment_method: 0, // 0 = COD, 1 = BANKING
+                order_type: 0, // 0 = Tạo đơn, 1 = Tư vấn tiếp
+                ship_discount: 0, // 0 = Khách trả, 1 = Miễn phí
                 information: null,
                 total: null,
                 facebook: null,
-                note: null
+                note: null,
+                notification_date: moment()
+                    .add(7, "days")
+                    .format("yyyy-MM-DD") //
             }
         };
     },

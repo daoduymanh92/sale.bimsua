@@ -31,13 +31,13 @@ class BaseRepository implements EloquentRepositoryInterface
     */
     public function create(array $data)
     {
-        $created_at = Carbon::now()->toDateTimeString();
-        $updated_at = Carbon::now()->toDateTimeString();
+        // $created_at = Carbon::now()->toDateTimeString();
+        // $updated_at = Carbon::now()->toDateTimeString();
 
-        $data['created_at'] = $created_at;
-        $data['updated_at'] = $created_at;
+        // $data['created_at'] = $created_at;
+        // $data['updated_at'] = $created_at;
         
-        $this->model->insert($data);
+        $this->model->create($data);
         return true;
     }
  
@@ -58,5 +58,13 @@ class BaseRepository implements EloquentRepositoryInterface
         return $this->model
                     ->where('id', $id)
                     ->update($data);
+    }
+
+    // create or update
+    public function createOrUpdate($phone, $data) {
+        return $this->model->updateOrCreate (
+                ['phone' => $phone],
+                $data
+        );
     }
 }
