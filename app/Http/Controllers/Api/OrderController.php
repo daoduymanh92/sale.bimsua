@@ -52,7 +52,7 @@ class OrderController extends Controller
         }
         
         // create ticket
-        $test = $this->ticketRepo->create($data);
+        $this->ticketRepo->createOrUpdate($phone, $data);
         return $this->returnSucess($rerult);     
     }
 
@@ -60,5 +60,10 @@ class OrderController extends Controller
         $data = $request->all();
         $rerult = $this->repository->update($id, $data);
         return $this->returnSucess($rerult);  
+    }
+
+    public function deleteOrder($id, Request $request) {
+        $rerult = $this->repository->delete($id);
+        return $this->returnSucess($rerult);
     }
 }

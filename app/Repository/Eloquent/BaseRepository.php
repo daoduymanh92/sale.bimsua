@@ -67,4 +67,8 @@ class BaseRepository implements EloquentRepositoryInterface
                 $data
         );
     }
+
+    public function delete($id) {
+        return $this->model->where('id', $id)->delete();
+    }
 }

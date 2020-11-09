@@ -222,10 +222,12 @@
                             </table>
                         </div>
                         <div class="px-6 pt-4 pb-2">
-                            <span
-                                class="inline-block bg-yellow-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                >Chỉnh sửa</span
-                            >
+                            <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                                Sửa
+                            </button>
+                            <button class="bg-red-500 hover:bg-red-100 text-gray-800 font-semibold py-2 px-4 border border-red-400 rounded shadow" @click="deleteOrder(order.id)">
+                                Xóa
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -237,6 +239,7 @@
 <script>
 import Repository from "../repositories/RepositoryFactory";
 import EventBus from "./../event-bus";
+import swal from "sweetalert";
 const OrderRepository = Repository.get("orders");
 
 export default {
@@ -280,6 +283,23 @@ export default {
                         console.log(error);
                     });
             }
+        },
+        deleteOrder: async (id) => {
+            var self = this;
+            swal({
+            title: "Bạn muốn xóa?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                OrderRepository.delete(id); 
+                window.location = "orders";
+            } else {
+                swal("Đơn hàng vẫn còn!");
+            }
+            });
         }
     }
 };

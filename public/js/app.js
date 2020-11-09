@@ -2726,6 +2726,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/RepositoryFactory */ "./resources/js/repositories/RepositoryFactory.js");
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../event-bus */ "./resources/js/event-bus.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_3__);
 
 
 var _this2 = undefined;
@@ -2970,6 +2972,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
 
 
 var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("orders");
@@ -3058,6 +3063,42 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
       }
 
       return changePayment;
+    }(),
+    deleteOrder: function () {
+      var _deleteOrder = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
+        var self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                self = _this2;
+                sweetalert__WEBPACK_IMPORTED_MODULE_3___default()({
+                  title: "Bạn muốn xóa?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+                }).then(function (willDelete) {
+                  if (willDelete) {
+                    OrderRepository["delete"](id);
+                    window.location = "orders";
+                  } else {
+                    sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Đơn hàng vẫn còn!");
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function deleteOrder(_x3) {
+        return _deleteOrder.apply(this, arguments);
+      }
+
+      return deleteOrder;
     }()
   }
 });
@@ -27777,7 +27818,38 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _c("div", { staticClass: "px-6 pt-4 pb-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Sửa\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "bg-red-500 hover:bg-red-100 text-gray-800 font-semibold py-2 px-4 border border-red-400 rounded shadow",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteOrder(order.id)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Xóa\n                        "
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
             })
@@ -27827,21 +27899,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-6 pt-4 pb-2" }, [
-      _c(
-        "span",
-        {
-          staticClass:
-            "inline-block bg-yellow-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-        },
-        [_vm._v("Chỉnh sửa")]
-      )
     ])
   }
 ]
