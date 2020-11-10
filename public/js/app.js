@@ -2431,7 +2431,7 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
               case 2:
                 response = _context.sent;
 
-                if (response.status = 200) {
+                if (response.status == 200) {
                   sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Bạn tạo đơn thành công.").then(function (value) {
                     window.location = "orders";
                   });

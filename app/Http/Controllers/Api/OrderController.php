@@ -23,7 +23,7 @@ class OrderController extends Controller
         $this->contactRepo = $contactRepo;
         $this->ticketRepo = $ticketRepo;
     }
-    //
+
     public function getList(Request $request) {
         $data = $request->all();
         $result = $this->repository->getList($data);
@@ -34,26 +34,26 @@ class OrderController extends Controller
     public function postOrder(Request $request) {
         $validatedData = Validator::make($request->all(), [
             'name' => 'required',
-            'phone' => 'required|numeric',
         ]);
         if($validatedData->fails()) {
             $errors = $validatedData->errors()->all();
             return $this->returnError($errors);  
         }
         $data = $request->all();
-        // create or update contact
-        $phone = $request->phone;
-        $this->contactRepo->createOrUpdate($phone, $data);
-
-        // create order
-        $order_type = $request->order_type;
-        if($order_type == 0) {
-        $rerult = $this->repository->create($data);
-        }
         
+        $phone = $request->phone;
+        $order_type = $request->order_type;
+        if(isset($phone) && !empty($phone)) {
+            // create or update contact
+            $this->contactRepo->createOrUpdate($phone, $data);
+            // create order
+            if($order_type == 0) {
+                $rerult = $this->repository->create($data);
+            }
+        }
         // create ticket
-        $this->ticketRepo->createOrUpdate($phone, $data);
-        return $this->returnSucess($rerult);     
+        $this->ticketRepo->create($data);
+        return $this->returnSucess([]);     
     }
 
     public function updateOrder($id, Request $request) {

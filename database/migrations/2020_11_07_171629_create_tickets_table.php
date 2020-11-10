@@ -15,8 +15,9 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('note')->nullable();
+            $table->boolean('status')->default(0)->comment('0: Chưa tư vấn, 1: Đã tư vấn');
             $table->timestamp('notification_date');
             $table->timestamps();
         });

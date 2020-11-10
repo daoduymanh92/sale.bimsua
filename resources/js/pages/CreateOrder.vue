@@ -272,7 +272,7 @@ export default {
     methods: {
         create_order: async order => {
             let response = await OrderRepository.create(order);
-            if ((response.status = 200)) {
+            if (response.status == 200) {
                 swal("Bạn tạo đơn thành công.").then(value => {
                     window.location = "orders";
                 });
