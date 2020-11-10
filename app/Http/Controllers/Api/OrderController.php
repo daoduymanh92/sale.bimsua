@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 use App\Http\Resources\Order as OrderResource;
 
@@ -43,6 +44,8 @@ class OrderController extends Controller
         
         $phone = $request->phone;
         $order_type = $request->order_type;
+        $notification_date = $request->notification_date;
+        $data['notification_date'] = Carbon::parse($notification_date)->toDateTimeString();
         if(isset($phone) && !empty($phone)) {
             // create or update contact
             $this->contactRepo->createOrUpdate($phone, $data);

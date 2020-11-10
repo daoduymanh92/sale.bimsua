@@ -20,8 +20,8 @@ class Ticket extends JsonResource
             'note' => $this->note,
             'phone' => $this->phone,
             'notification_date' => $this->notification_date,
-            'name' => $this->contact->name,
-            'facebook' => $this->contact->facebook,
+            'name' => isset($this->contact) ? $this->contact->name : null,
+            'facebook' => isset($this->contact) ? $this->contact->facebook : null,
             'created_at' => Carbon::parse($this->created_at)->format('d-m-Y'),
             'updated_at' => Carbon::parse($this->updated_at)->format('d-m-Y'),
         ];
