@@ -17,6 +17,6 @@ class Contact extends Model
      */
     public function tickets()
     {
-        return $this->hasMany('App\Model\Ticket', 'tickets.phone', 'contacts.phone');
+        return $this->hasMany('App\Model\Ticket', 'contact_id', 'id');
     }
 }

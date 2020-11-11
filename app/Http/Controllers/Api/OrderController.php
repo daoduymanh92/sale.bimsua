@@ -48,7 +48,9 @@ class OrderController extends Controller
         $data['notification_date'] = Carbon::parse($notification_date)->toDateTimeString();
         if(isset($phone) && !empty($phone)) {
             // create or update contact
-            $this->contactRepo->createOrUpdate($phone, $data);
+            $result = $this->contactRepo->createOrUpdate($phone, $data);
+            $contact_id = $result->id;
+            $data['contact_id'] = $contact_id;
             // create order
             if($order_type == 0) {
                 $rerult = $this->repository->create($data);

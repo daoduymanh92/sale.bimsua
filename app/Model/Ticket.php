@@ -9,7 +9,7 @@ class Ticket extends Model
     //
     protected $table = 'tickets'; 
     protected $fillable = [
-        'phone', 'note', 'notification_date'
+        'phone', 'note', 'notification_date', 'contact_id'
     ];
 
     /**
@@ -17,6 +17,6 @@ class Ticket extends Model
      */
     public function contact()
     {
-        return $this->belongsTo('App\Model\Contact','phone', 'phone');
+        return $this->belongsTo('App\Model\Contact','contact_id', 'id');
     }
 }
