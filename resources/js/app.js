@@ -16,7 +16,7 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 
 import App from "./pages/App";
-import Hello from "./pages/Hello";
+import Test from "./pages/Hello";
 import Home from "./pages/Home";
 import Order from "./pages/CreateOrder";
 import Orders from "./pages/OrderList";
@@ -34,9 +34,9 @@ const router = new VueRouter({
             component: Orders
         },
         {
-            path: "/hello",
-            name: "hello",
-            component: Hello
+            path: "/test",
+            name: "test",
+            component: Test
         },
         {
             path: "/order",

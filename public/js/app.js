@@ -2467,6 +2467,21 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/RepositoryFactory */ "./resources/js/repositories/RepositoryFactory.js");
+/* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../event-bus */ "./resources/js/event-bus.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2703,11 +2718,129 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("orders");
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Order",
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
   data: function data() {
     return {
-      isOpen: false
+      order: {
+        name: null,
+        phone: null,
+        gender: 0,
+        address: null,
+        payment_method: 0,
+        // 0 = COD, 1 = BANKING
+        order_type: 0,
+        // 0 = Tạo đơn, 1 = Tư vấn tiếp
+        ship_discount: 0,
+        // 0 = Khách trả, 1 = Miễn phí
+        information: null,
+        total: null,
+        facebook: null,
+        note: null,
+        notification_date: moment__WEBPACK_IMPORTED_MODULE_5___default()().add(7, "days").format("yyyy-MM-DD") //
+
+      },
+      products: [{
+        name: null,
+        mass: 0,
+        amount: 0
+      }]
     };
+  },
+  computed: {
+    product_length: function product_length() {
+      return this.products.length;
+    }
+  },
+  methods: {
+    create_order: function () {
+      var _create_order = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(order) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return OrderRepository.create(order);
+
+              case 2:
+                response = _context.sent;
+
+                if (response.status == 200) {
+                  sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Bạn tạo đơn thành công.").then(function (value) {
+                    window.location = "orders";
+                  });
+                } else {
+                  sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Có lỗi!", "!", "error");
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function create_order(_x) {
+        return _create_order.apply(this, arguments);
+      }
+
+      return create_order;
+    }(),
+    addProduct: function addProduct() {
+      this.products.push({
+        name: null,
+        mass: 0,
+        amount: 0
+      });
+    },
+    removeProduct: function removeProduct(index) {
+      this.products.splice(index, 1);
+    }
   }
 });
 
@@ -26376,7 +26509,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "antialiased text-gray-900" },
+    { staticClass: "antialiased text-gray-900 font-sans" },
     [
       _c("Header"),
       _vm._v(" "),
@@ -27067,241 +27200,158 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c(
-      "div",
-      { staticClass: "container mx-auto" },
-      [
-        _c("vue-plyr", [
-          _c("div", { staticClass: "plyr__video-embed" }, [
-            _c("iframe", {
-              attrs: {
-                src:
-                  "https://www.youtube.com/embed/bTqVqk7FSmY?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1",
-                allowfullscreen: "",
-                allowtransparency: "",
-                allow: "autoplay"
-              }
-            })
-          ])
-        ])
-      ],
-      1
-    ),
-    _vm._v(" "),
     _c("div", { staticClass: "container mx-auto" }, [
-      _c("div", { staticClass: "py-12 bg-white" }, [
-        _c(
-          "div",
-          { staticClass: "max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-10" }, [
-              _c(
-                "ul",
-                {
-                  staticClass: "md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
-                },
-                [
-                  _c("li", [
-                    _c("div", { staticClass: "flex" }, [
-                      _c("div", { staticClass: "flex-shrink-0" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "h-6 w-6",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  stroke: "currentColor"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    "stroke-width": "2",
-                                    d:
-                                      "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "mt-10 md:mt-0" }, [
-                    _c("div", { staticClass: "flex" }, [
-                      _c("div", { staticClass: "flex-shrink-0" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "h-6 w-6",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  stroke: "currentColor"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    "stroke-width": "2",
-                                    d:
-                                      "M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(2)
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "mt-10 md:mt-0" }, [
-                    _c("div", { staticClass: "flex" }, [
-                      _c("div", { staticClass: "flex-shrink-0" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "h-6 w-6",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  stroke: "currentColor"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    "stroke-width": "2",
-                                    d: "M13 10V3L4 14h7v7l9-11h-7z"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(3)
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "mt-10 md:mt-0" }, [
-                    _c("div", { staticClass: "flex" }, [
-                      _c("div", { staticClass: "flex-shrink-0" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "h-6 w-6",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  stroke: "currentColor"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    "stroke-width": "2",
-                                    d:
-                                      "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(4)
-                    ])
-                  ])
-                ]
+      _c("div", { staticClass: "grid grid-cols-2 gap-4" }, [
+        _c("div", { staticClass: "rounded-lg border-red-500" }, [
+          _c("h1", { staticClass: "font-bold" }, [
+            _vm._v("Thông tin đơn hàng")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("h1", { staticClass: "font-bold" }, [
+            _vm._v("Thông tin lấy hàng")
+          ]),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c("h1", { staticClass: "font-bold" }, [_vm._v("Thông tin hỗ trợ")]),
+          _vm._v(" "),
+          _vm._m(8),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v(
+                "\n                        Dự kiện thời gian CSKH\n                    "
               )
-            ])
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container mx-auto" }, [
-      _c("div", { staticClass: "flex mb-4" }, [
-        _c("div", { staticClass: "w-full h-12 flex justify-center" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-4 px-20 rounded inline-flex items-center"
-            },
-            [
-              _c(
-                "svg",
-                {
-                  staticClass: "fill-current w-4 h-4 mr-2",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 20 20"
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "inline col-span-2" },
+              [
+                _c("datepicker", {
+                  staticClass:
+                    "w-full p-1 border rounded border-gray-500 focus:outline-none",
+                  attrs: { format: "yyyy-MM-dd" },
+                  model: {
+                    value: _vm.order.notification_date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.order, "notification_date", $$v)
+                    },
+                    expression: "order.notification_date"
                   }
-                },
-                [
-                  _c("path", {
-                    attrs: { d: "M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(9)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "rounded-lg border-yellow-500" }, [
+          _c("h1", { staticClass: "font-bold" }, [
+            _vm._v("Thông tin hàng hóa")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mb-8" },
+            _vm._l(_vm.products, function(product, index) {
+              return _c("div", { staticClass: "grid grid-cols-12 my-1" }, [
+                _c("div", { staticClass: "inline col-span-6 mx-1" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.name,
+                        expression: "product.name"
+                      }
+                    ],
+                    staticClass:
+                      "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                    attrs: { type: "text", placeholder: "Tên sản phẩm" },
+                    domProps: { value: product.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "name", $event.target.value)
+                      }
+                    }
                   })
-                ]
-              ),
-              _vm._v(" "),
-              _c("span", [_vm._v("Tải ảnh lên")])
-            ]
-          )
+                ]),
+                _vm._v(" "),
+                _vm._m(10, true),
+                _vm._v(" "),
+                _vm._m(11, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "inline col-span-2" }, [
+                  _vm.product_length == index + 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "w-full ml-5 bg-white py-2 px-3 border border-blue-300 rounded-md shadow-sm text-sm leading-4 font-medium text-blue-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                          attrs: { type: "button" },
+                          on: { click: _vm.addProduct }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Thêm\n                            "
+                          )
+                        ]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass:
+                            "w-full ml-5 bg-white py-2 px-3 border border-red-300 rounded-md shadow-sm text-sm leading-4 font-medium text-red-700 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.removeProduct(index)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Xóa\n                            "
+                          )
+                        ]
+                      )
+                ])
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _vm._m(12),
+          _vm._v(" "),
+          _vm._m(13),
+          _vm._v(" "),
+          _vm._m(14),
+          _vm._v(" "),
+          _vm._m(15),
+          _vm._v(" "),
+          _vm._m(16),
+          _vm._v(" "),
+          _vm._m(17)
         ])
       ])
     ])
@@ -27312,30 +27362,204 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "lg:text-center" }, [
-      _c(
-        "h3",
-        {
-          staticClass:
-            "mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
-        },
-        [
-          _vm._v(
-            "\n                            Hàng ngàn người đang sử dụng dịch vụ in ảnh thẻ\n                            online của chúng tôi\n                        "
-          )
-        ]
-      ),
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Số điện thoại")
+      ]),
       _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue hover:border-blue-700 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Tên khách hàng")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Địa chỉ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Thành phố")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Quận huyện")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Phường xã")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Hình thức gửi hàng")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("label", { staticClass: "mr-8" }, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Lấy hàng tận nơi\n                        ")
+        ]),
+        _vm._v(" "),
+        _c("label", {}, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Gửi hàng bưu cục\n                        ")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Địa chỉ lấy hàng")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Facebook")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Thông tin hỗ trợ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("textarea", {
+          staticClass:
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { rows: "4" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "inline col-span-2 mx-1" }, [
       _c(
-        "p",
+        "select",
         {
           staticClass:
-            "mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto"
+            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { id: "cars" }
         },
         [
-          _vm._v(
-            "\n                            Lorem ipsum dolor sit amet consect adipisicing elit.\n                            Possimus magnam voluptatum cupiditate veritatis in\n                            accusamus quisquam.\n                        "
-          )
+          _c("option", { attrs: { value: "0.1" } }, [_vm._v("0.1")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "0.2" } }, [_vm._v("0.2")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "0.3" } }, [_vm._v("0.3")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "0.4", selected: "" } }, [
+            _vm._v("0.4")
+          ])
         ]
       )
     ])
@@ -27344,17 +27568,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ml-4" }, [
-      _c("h4", { staticClass: "text-lg leading-6 font-medium text-gray-900" }, [
+    return _c("div", { staticClass: "inline col-span-2 mx-1" }, [
+      _c("input", {
+        staticClass:
+          "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+        attrs: { type: "text", placeholder: "Số lượng" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
         _vm._v(
-          "\n                                            Giao hàng tận nơi\n                                        "
+          "\n                        Hình thức vận chuyển\n                    "
         )
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-2 text-base leading-6 text-gray-500" }, [
-        _vm._v(
-          "\n                                            Lorem ipsum, dolor sit amet\n                                            consectetur adipisicing elit.\n                                            Maiores impedit perferendis suscipit\n                                            eaque, iste dolor cupiditate\n                                            blanditiis ratione.\n                                        "
-        )
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("label", { staticClass: "mr-8" }, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Đường bộ\n                        ")
+        ]),
+        _vm._v(" "),
+        _c("label", {}, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Đường bay\n                        ")
+        ])
       ])
     ])
   },
@@ -27362,17 +27610,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ml-4" }, [
-      _c("h4", { staticClass: "text-lg leading-6 font-medium text-gray-900" }, [
-        _vm._v(
-          "\n                                            In bằng ảnh điện thoại\n                                        "
-        )
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1 relative " }, [
+        _c("label", { staticClass: "mr-8" }, [_vm._v(" Phí ship ")]),
+        _vm._v(" "),
+        _c("label", [_c("b", [_vm._v("0")])]),
+        _c("small", [_vm._v("đ")])
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-2 text-base leading-6 text-gray-500" }, [
-        _vm._v(
-          "\n                                            Lorem ipsum, dolor sit amet\n                                            consectetur adipisicing elit.\n                                            Maiores impedit perferendis suscipit\n                                            eaque, iste dolor cupiditate\n                                            blanditiis ratione.\n                                        "
-        )
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("label", { staticClass: "mr-8" }, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Shop trả\n                        ")
+        ]),
+        _vm._v(" "),
+        _c("label", {}, [
+          _c("input", {
+            staticClass: "mr-1",
+            attrs: { type: "radio", name: "optradio" }
+          }),
+          _vm._v("Khách trả\n                        ")
+        ])
       ])
     ])
   },
@@ -27380,17 +27641,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ml-4" }, [
-      _c("h4", { staticClass: "text-lg leading-6 font-medium text-gray-900" }, [
-        _vm._v(
-          "\n                                            Chất lượng\n                                        "
-        )
-      ]),
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Tiền thu hộ")]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-2 text-base leading-6 text-gray-500" }, [
-        _vm._v(
-          "\n                                            Lorem ipsum, dolor sit amet\n                                            consectetur adipisicing elit.\n                                            Maiores impedit perferendis suscipit\n                                            eaque, iste dolor cupiditate\n                                            blanditiis ratione.\n                                        "
-        )
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
       ])
     ])
   },
@@ -27398,18 +27657,48 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ml-4" }, [
-      _c("h4", { staticClass: "text-lg leading-6 font-medium text-gray-900" }, [
-        _vm._v(
-          "\n                                            Tiện lợi\n                                        "
-        )
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Giá trị hàng")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+      _c("div", { staticClass: "inline col-span-1" }, [
+        _vm._v("Tổng tiền thu")
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-2 text-base leading-6 text-gray-500" }, [
-        _vm._v(
-          "\n                                            Lorem ipsum, dolor sit amet\n                                            consectetur adipisicing elit.\n                                            Maiores impedit perferendis suscipit\n                                            eaque, iste dolor cupiditate\n                                            blanditiis ratione.\n                                        "
-        )
+      _c("div", { staticClass: "inline col-span-2" }, [
+        _c("input", {
+          staticClass:
+            "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+          attrs: { type: "text", placeholder: "This is input" }
+        })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-1 my-1 mt-8" }, [
+      _c(
+        "button",
+        {
+          staticClass: "w-full p-1 bg-yellow-400 rounded font-bold text-black"
+        },
+        [_vm._v("\n                        Tạo đơn\n                    ")]
+      )
     ])
   }
 ]
@@ -47459,8 +47748,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "home",
     component: _pages_OrderList__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
-    path: "/hello",
-    name: "hello",
+    path: "/test",
+    name: "test",
     component: _pages_Hello__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: "/order",
