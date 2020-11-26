@@ -31,3 +31,8 @@ Route::prefix('orders')->group(function () {
 Route::prefix('tickets')->group(function () {
     Route::get('/', 'Api\TicketController@getList');
 });
+
+// addresses
+Route::prefix('addresses')->group(function () {
+    Route::get('/', 'Api\AddressController@getList');
+});

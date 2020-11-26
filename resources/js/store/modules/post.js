@@ -16,6 +16,9 @@ const actions = {
         console.log("run action");
         let data = await PostRepository.get();
         commit("SET_VARIABLE_1", data.data);
+    },
+    async testNow({ commit }) {
+        console.log("now");
     }
 };
 // Mutations

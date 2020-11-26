@@ -3,13 +3,14 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-2 gap-4">
                 <div class="rounded-lg border-red-500">
-                    <h1 class="font-bold">Thông tin đơn hàng</h1>
+                    <h1 class="font-bold">Thông tin đơn hàng {{ cities }}</h1>
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1">Số điện thoại</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.tel"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder="SDT"
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue hover:border-blue-700 focus:outline-none"
                             />
                         </div>
@@ -18,8 +19,9 @@
                         <div class="inline col-span-1">Tên khách hàng</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.name"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -28,8 +30,9 @@
                         <div class="inline col-span-1">Địa chỉ</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.address"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -38,8 +41,9 @@
                         <div class="inline col-span-1">Thành phố</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.province"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -48,8 +52,9 @@
                         <div class="inline col-span-1">Quận huyện</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.district"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -58,28 +63,47 @@
                         <div class="inline col-span-1">Phường xã</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.ward"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
+                                class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 my-1">
+                        <div class="inline col-span-1">Tên đường/phố</div>
+                        <div class="inline col-span-2">
+                            <input
+                                v-model="order.street"
+                                type="text"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
                     </div>
                     <h1 class="font-bold">Thông tin lấy hàng</h1>
                     <div class="grid grid-cols-3 my-1">
-                        <div class="inline col-span-1">Hình thức gửi hàng</div>
+                        <div class="inline col-span-1">
+                            Hình thức gửi hàng
+                        </div>
                         <div class="inline col-span-2">
                             <label class="mr-8">
                                 <input
+                                    v-model="order.pick_option"
                                     type="radio"
-                                    name="optradio"
+                                    name="pick_option"
                                     class="mr-1"
+                                    v-bind:value="'cod'"
+                                    checked
                                 />Lấy hàng tận nơi
                             </label>
                             <label class="">
                                 <input
+                                    v-model="order.pick_option"
                                     type="radio"
-                                    name="optradio"
+                                    name="pick_option"
                                     class="mr-1"
+                                    v-bind:value="'post'"
                                 />Gửi hàng bưu cục
                             </label>
                         </div>
@@ -88,8 +112,9 @@
                         <div class="inline col-span-1">Địa chỉ lấy hàng</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.pick_address"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -100,7 +125,7 @@
                         <div class="inline col-span-2">
                             <input
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -147,17 +172,20 @@
                                 <select
                                     id="cars"
                                     class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
+                                    v-model="product.weight"
                                 >
-                                    <option value="0.1">0.1</option>
+                                    <option value="0.1" selected>0.1</option>
                                     <option value="0.2">0.2</option>
                                     <option value="0.3">0.3</option>
-                                    <option value="0.4" selected>0.4</option>
+                                    <option value="0.4">0.4</option>
                                 </select>
                             </div>
                             <div class="inline col-span-2 mx-1">
                                 <input
-                                    type="text"
+                                    v-model="product.quantity"
+                                    type="number"
                                     placeholder="Số lượng"
+                                    min="1"
                                     class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                                 />
                             </div>
@@ -188,49 +216,64 @@
                         <div class="inline col-span-2">
                             <label class="mr-8">
                                 <input
+                                    v-model="order.transport"
                                     type="radio"
-                                    name="optradio"
+                                    name="transport"
                                     class="mr-1"
+                                    v-bind:value="'road'"
+                                    checked
                                 />Đường bộ
                             </label>
                             <label class="">
                                 <input
+                                    v-model="order.transport"
                                     type="radio"
-                                    name="optradio"
+                                    name="transport"
                                     class="mr-1"
+                                    v-bind:value="'fly'"
                                 />Đường bay
                             </label>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1 relative ">
-                            <label class="mr-8"> Phí ship </label>
+                            <label class="mr-8">
+                                Phí ship
+                            </label>
 
                             <label> <b>0</b> </label><small>đ</small>
                         </div>
                         <div class="inline col-span-2">
                             <label class="mr-8">
                                 <input
+                                    v-model="order.is_freeship"
                                     type="radio"
-                                    name="optradio"
+                                    name="freship"
                                     class="mr-1"
+                                    v-bind:value="'1'"
+                                    checked
                                 />Shop trả
                             </label>
                             <label class="">
                                 <input
+                                    v-model="order.is_freeship"
                                     type="radio"
-                                    name="optradio"
+                                    name="freship"
                                     class="mr-1"
+                                    v-bind:value="'0'"
                                 />Khách trả
                             </label>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 my-1">
-                        <div class="inline col-span-1">Tiền thu hộ</div>
+                        <div class="inline col-span-1">
+                            Tiền thu hộ
+                        </div>
                         <div class="inline col-span-2">
                             <input
-                                type="text"
-                                placeholder="This is input"
+                                v-model="order.pick_money"
+                                type="number"
+                                placeholder="0 đ"
                                 class="w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -239,8 +282,9 @@
                         <div class="inline col-span-1">Giá trị hàng</div>
                         <div class="inline col-span-2">
                             <input
+                                v-model="order.value"
                                 type="text"
-                                placeholder="This is input"
+                                placeholder="0"
                                 class="w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -250,7 +294,7 @@
                         <div class="inline col-span-2">
                             <input
                                 type="text"
-                                placeholder="This is input"
+                                placeholder=""
                                 class="w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
                             />
                         </div>
@@ -258,6 +302,7 @@
                     <div class="grid grid-cols-1 my-1 mt-8">
                         <button
                             class="w-full p-1 bg-yellow-400 rounded font-bold text-black"
+                            v-on:click="get_cities"
                         >
                             Tạo đơn
                         </button>
@@ -276,6 +321,7 @@ import Datepicker from "vuejs-datepicker";
 import moment from "moment";
 
 const OrderRepository = Repository.get("orders");
+const AddressRepository = Repository.get("addresses");
 
 export default {
     name: "Order",
@@ -285,17 +331,29 @@ export default {
     data() {
         return {
             order: {
-                name: null,
-                phone: null,
-                gender: 0,
-                address: null,
-                payment_method: 0, // 0 = COD, 1 = BANKING
-                order_type: 0, // 0 = Tạo đơn, 1 = Tư vấn tiếp
-                ship_discount: 0, // 0 = Khách trả, 1 = Miễn phí
-                information: null,
-                total: null,
-                facebook: null,
-                note: null,
+                pick_name: "Hegen Việt Nam",
+                pick_money: 0,
+                value: "0",
+                pick_address:
+                    "Số 5, Hẻm 141/150/38, Phố Giáp Nhị, Giáp Nhị, Quận Hoàng Mai, Hà Nội",
+                pick_province: "Hà Nội",
+                pick_district: "Quận Hoàng Mai",
+                pick_ward: "Giáp Nhị", // 0 = Tạo đơn, 1 = Tư vấn tiếp
+                pick_tel: "0969146465", // 0 = Khách trả, 1 = Miễn phí
+                pick_email: "hoang.liemtlu@gmail.com",
+                name: "",
+                address: "",
+                province: "",
+                district: "",
+                ward: "",
+                street: "",
+                hamlet: "",
+                tel: "",
+                note: "",
+                email: "Null",
+                is_freeship: "0",
+                pick_option: "cod",
+                transport: "road",
                 notification_date: moment()
                     .add(7, "days")
                     .format("yyyy-MM-DD") //
@@ -303,11 +361,15 @@ export default {
             products: [
                 {
                     name: null,
-                    mass: 0,
-                    amount: 0
+                    weight: 0.1,
+                    quantity: 1
                 }
-            ]
+            ],
+            cities: []
         };
+    },
+    mounted() {
+        // this.get_cities();
     },
     computed: {
         product_length: function() {
@@ -315,6 +377,9 @@ export default {
         }
     },
     methods: {
+        get_cities: () => {
+            this.$store.modules.post.dispatch("testNow");
+        },
         create_order: async order => {
             let response = await OrderRepository.create(order);
             if (response.status == 200) {
@@ -334,6 +399,9 @@ export default {
         },
         removeProduct(index) {
             this.products.splice(index, 1);
+        },
+        getShipFee: () => {
+            console.log(order.province);
         }
     }
 };

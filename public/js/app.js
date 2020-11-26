@@ -2478,10 +2478,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
 
 
+var _this = undefined;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2758,6 +2805,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("orders");
+var AddressRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("addresses");
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Order",
   components: {
@@ -2766,29 +2814,42 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
   data: function data() {
     return {
       order: {
-        name: null,
-        phone: null,
-        gender: 0,
-        address: null,
-        payment_method: 0,
-        // 0 = COD, 1 = BANKING
-        order_type: 0,
+        pick_name: "Hegen Việt Nam",
+        pick_money: 0,
+        value: "0",
+        pick_address: "Số 5, Hẻm 141/150/38, Phố Giáp Nhị, Giáp Nhị, Quận Hoàng Mai, Hà Nội",
+        pick_province: "Hà Nội",
+        pick_district: "Quận Hoàng Mai",
+        pick_ward: "Giáp Nhị",
         // 0 = Tạo đơn, 1 = Tư vấn tiếp
-        ship_discount: 0,
+        pick_tel: "0969146465",
         // 0 = Khách trả, 1 = Miễn phí
-        information: null,
-        total: null,
-        facebook: null,
-        note: null,
+        pick_email: "hoang.liemtlu@gmail.com",
+        name: "",
+        address: "",
+        province: "",
+        district: "",
+        ward: "",
+        street: "",
+        hamlet: "",
+        tel: "",
+        note: "",
+        email: "Null",
+        is_freeship: "0",
+        pick_option: "cod",
+        transport: "road",
         notification_date: moment__WEBPACK_IMPORTED_MODULE_5___default()().add(7, "days").format("yyyy-MM-DD") //
 
       },
       products: [{
         name: null,
-        mass: 0,
-        amount: 0
-      }]
+        weight: 0.1,
+        quantity: 1
+      }],
+      cities: []
     };
+  },
+  mounted: function mounted() {// this.get_cities();
   },
   computed: {
     product_length: function product_length() {
@@ -2796,6 +2857,9 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
     }
   },
   methods: {
+    get_cities: function get_cities() {
+      _this.$store.modules.post.dispatch("testNow");
+    },
     create_order: function () {
       var _create_order = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(order) {
         var response;
@@ -2840,6 +2904,9 @@ var OrderRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
     },
     removeProduct: function removeProduct(index) {
       this.products.splice(index, 1);
+    },
+    getShipFee: function getShipFee() {
+      console.log(order.province);
     }
   }
 });
@@ -27204,32 +27271,324 @@ var render = function() {
       _c("div", { staticClass: "grid grid-cols-2 gap-4" }, [
         _c("div", { staticClass: "rounded-lg border-red-500" }, [
           _c("h1", { staticClass: "font-bold" }, [
-            _vm._v("Thông tin đơn hàng")
+            _vm._v("Thông tin đơn hàng " + _vm._s(_vm.cities))
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Số điện thoại")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.tel,
+                    expression: "order.tel"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue hover:border-blue-700 focus:outline-none",
+                attrs: { type: "text", placeholder: "SDT" },
+                domProps: { value: _vm.order.tel },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "tel", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Tên khách hàng")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.name,
+                    expression: "order.name"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "name", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Địa chỉ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.address,
+                    expression: "order.address"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "address", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Thành phố")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.province,
+                    expression: "order.province"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.province },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "province", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Quận huyện")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.district,
+                    expression: "order.district"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.district },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "district", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Phường xã")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.ward,
+                    expression: "order.ward"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.ward },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "ward", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Tên đường/phố")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.street,
+                    expression: "order.street"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.street },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "street", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
           _c("h1", { staticClass: "font-bold" }, [
             _vm._v("Thông tin lấy hàng")
           ]),
           _vm._v(" "),
-          _vm._m(6),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v(
+                "\n                        Hình thức gửi hàng\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("label", { staticClass: "mr-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.pick_option,
+                      expression: "order.pick_option"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "pick_option", checked: "" },
+                  domProps: {
+                    value: "cod",
+                    checked: _vm._q(_vm.order.pick_option, "cod")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "pick_option", "cod")
+                    }
+                  }
+                }),
+                _vm._v("Lấy hàng tận nơi\n                        ")
+              ]),
+              _vm._v(" "),
+              _c("label", {}, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.pick_option,
+                      expression: "order.pick_option"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "pick_option" },
+                  domProps: {
+                    value: "post",
+                    checked: _vm._q(_vm.order.pick_option, "post")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "pick_option", "post")
+                    }
+                  }
+                }),
+                _vm._v("Gửi hàng bưu cục\n                        ")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(7),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Địa chỉ lấy hàng")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.pick_address,
+                    expression: "order.pick_address"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "" },
+                domProps: { value: _vm.order.pick_address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "pick_address", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
           _c("h1", { staticClass: "font-bold" }, [_vm._v("Thông tin hỗ trợ")]),
           _vm._v(" "),
-          _vm._m(8),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
             _c("div", { staticClass: "inline col-span-1" }, [
@@ -27259,7 +27618,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(9)
+          _vm._m(1)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "rounded-lg border-yellow-500" }, [
@@ -27297,9 +27656,87 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(10, true),
+                _c("div", { staticClass: "inline col-span-2 mx-1" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: product.weight,
+                          expression: "product.weight"
+                        }
+                      ],
+                      staticClass:
+                        "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                      attrs: { id: "cars" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            product,
+                            "weight",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "0.1", selected: "" } }, [
+                        _vm._v("0.1")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0.2" } }, [
+                        _vm._v("0.2")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0.3" } }, [
+                        _vm._v("0.3")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0.4" } }, [_vm._v("0.4")])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(11, true),
+                _c("div", { staticClass: "inline col-span-2 mx-1" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.quantity,
+                        expression: "product.quantity"
+                      }
+                    ],
+                    staticClass:
+                      "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                    attrs: {
+                      type: "number",
+                      placeholder: "Số lượng",
+                      min: "1"
+                    },
+                    domProps: { value: product.quantity },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "quantity", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "inline col-span-2" }, [
                   _vm.product_length == index + 1
@@ -27341,17 +27778,203 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _vm._m(12),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v(
+                "\n                        Hình thức vận chuyển\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("label", { staticClass: "mr-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.transport,
+                      expression: "order.transport"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "transport", checked: "" },
+                  domProps: {
+                    value: "road",
+                    checked: _vm._q(_vm.order.transport, "road")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "transport", "road")
+                    }
+                  }
+                }),
+                _vm._v("Đường bộ\n                        ")
+              ]),
+              _vm._v(" "),
+              _c("label", {}, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.transport,
+                      expression: "order.transport"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "transport" },
+                  domProps: {
+                    value: "fly",
+                    checked: _vm._q(_vm.order.transport, "fly")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "transport", "fly")
+                    }
+                  }
+                }),
+                _vm._v("Đường bay\n                        ")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(13),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("label", { staticClass: "mr-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.is_freeship,
+                      expression: "order.is_freeship"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "freship", checked: "" },
+                  domProps: {
+                    value: "1",
+                    checked: _vm._q(_vm.order.is_freeship, "1")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "is_freeship", "1")
+                    }
+                  }
+                }),
+                _vm._v("Shop trả\n                        ")
+              ]),
+              _vm._v(" "),
+              _c("label", {}, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.is_freeship,
+                      expression: "order.is_freeship"
+                    }
+                  ],
+                  staticClass: "mr-1",
+                  attrs: { type: "radio", name: "freship" },
+                  domProps: {
+                    value: "0",
+                    checked: _vm._q(_vm.order.is_freeship, "0")
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.order, "is_freeship", "0")
+                    }
+                  }
+                }),
+                _vm._v("Khách trả\n                        ")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(14),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v(
+                "\n                        Tiền thu hộ\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.pick_money,
+                    expression: "order.pick_money"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "number", placeholder: "0 đ" },
+                domProps: { value: _vm.order.pick_money },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "pick_money", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(15),
+          _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
+            _c("div", { staticClass: "inline col-span-1" }, [
+              _vm._v("Giá trị hàng")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inline col-span-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order.value,
+                    expression: "order.value"
+                  }
+                ],
+                staticClass:
+                  "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                attrs: { type: "text", placeholder: "0" },
+                domProps: { value: _vm.order.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.order, "value", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(16),
+          _vm._m(3),
           _vm._v(" "),
-          _vm._m(17)
+          _c("div", { staticClass: "grid grid-cols-1 my-1 mt-8" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "w-full p-1 bg-yellow-400 rounded font-bold text-black",
+                on: { click: _vm.get_cities }
+              },
+              [
+                _vm._v(
+                  "\n                        Tạo đơn\n                    "
+                )
+              ]
+            )
+          ])
         ])
       ])
     ])
@@ -27363,159 +27986,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [
-        _vm._v("Số điện thoại")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue hover:border-blue-700 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [
-        _vm._v("Tên khách hàng")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Địa chỉ")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Thành phố")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Quận huyện")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Phường xã")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [
-        _vm._v("Hình thức gửi hàng")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("label", { staticClass: "mr-8" }, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Lấy hàng tận nơi\n                        ")
-        ]),
-        _vm._v(" "),
-        _c("label", {}, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Gửi hàng bưu cục\n                        ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [
-        _vm._v("Địa chỉ lấy hàng")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
       _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Facebook")]),
       _vm._v(" "),
       _c("div", { staticClass: "inline col-span-2" }, [
         _c("input", {
           staticClass:
             "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
+          attrs: { type: "text", placeholder: "" }
         })
       ])
     ])
@@ -27542,131 +28019,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inline col-span-2 mx-1" }, [
-      _c(
-        "select",
-        {
-          staticClass:
-            "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { id: "cars" }
-        },
-        [
-          _c("option", { attrs: { value: "0.1" } }, [_vm._v("0.1")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "0.2" } }, [_vm._v("0.2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "0.3" } }, [_vm._v("0.3")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "0.4", selected: "" } }, [
-            _vm._v("0.4")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inline col-span-2 mx-1" }, [
-      _c("input", {
-        staticClass:
-          "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-        attrs: { type: "text", placeholder: "Số lượng" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [
+    return _c("div", { staticClass: "inline col-span-1 relative " }, [
+      _c("label", { staticClass: "mr-8" }, [
         _vm._v(
-          "\n                        Hình thức vận chuyển\n                    "
+          "\n                            Phí ship\n                        "
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("label", { staticClass: "mr-8" }, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Đường bộ\n                        ")
-        ]),
-        _vm._v(" "),
-        _c("label", {}, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Đường bay\n                        ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1 relative " }, [
-        _c("label", { staticClass: "mr-8" }, [_vm._v(" Phí ship ")]),
-        _vm._v(" "),
-        _c("label", [_c("b", [_vm._v("0")])]),
-        _c("small", [_vm._v("đ")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("label", { staticClass: "mr-8" }, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Shop trả\n                        ")
-        ]),
-        _vm._v(" "),
-        _c("label", {}, [
-          _c("input", {
-            staticClass: "mr-1",
-            attrs: { type: "radio", name: "optradio" }
-          }),
-          _vm._v("Khách trả\n                        ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Tiền thu hộ")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
-      _c("div", { staticClass: "inline col-span-1" }, [_vm._v("Giá trị hàng")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "inline col-span-2" }, [
-        _c("input", {
-          staticClass:
-            "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
-        })
-      ])
+      _c("label", [_c("b", [_vm._v("0")])]),
+      _c("small", [_vm._v("đ")])
     ])
   },
   function() {
@@ -27682,23 +28043,9 @@ var staticRenderFns = [
         _c("input", {
           staticClass:
             "w-full p-1 border-b-2 rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-          attrs: { type: "text", placeholder: "This is input" }
+          attrs: { type: "text", placeholder: "" }
         })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid grid-cols-1 my-1 mt-8" }, [
-      _c(
-        "button",
-        {
-          staticClass: "w-full p-1 bg-yellow-400 rounded font-bold text-black"
-        },
-        [_vm._v("\n                        Tạo đơn\n                    ")]
-      )
     ])
   }
 ]
@@ -48148,14 +48495,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************!*\
   !*** ./resources/js/pages/Hello.vue ***!
   \**************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Hello_vue_vue_type_template_id_2d8dafce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Hello.vue?vue&type=template&id=2d8dafce& */ "./resources/js/pages/Hello.vue?vue&type=template&id=2d8dafce&");
 /* harmony import */ var _Hello_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hello.vue?vue&type=script&lang=js& */ "./resources/js/pages/Hello.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Hello_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Hello_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -48185,7 +48533,7 @@ component.options.__file = "resources/js/pages/Hello.vue"
 /*!***************************************************************!*\
   !*** ./resources/js/pages/Hello.vue?vue&type=script&lang=js& ***!
   \***************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48485,17 +48833,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _postRepository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./postRepository */ "./resources/js/repositories/postRepository.js");
 /* harmony import */ var _orderRepository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orderRepository */ "./resources/js/repositories/orderRepository.js");
 /* harmony import */ var _ticketRepository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ticketRepository */ "./resources/js/repositories/ticketRepository.js");
+/* harmony import */ var _addressRepository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addressRepository */ "./resources/js/repositories/addressRepository.js");
+
 
 
 
 var repositories = {
   posts: _postRepository__WEBPACK_IMPORTED_MODULE_0__["default"],
   orders: _orderRepository__WEBPACK_IMPORTED_MODULE_1__["default"],
-  tickets: _ticketRepository__WEBPACK_IMPORTED_MODULE_2__["default"]
+  tickets: _ticketRepository__WEBPACK_IMPORTED_MODULE_2__["default"],
+  addresses: _addressRepository__WEBPACK_IMPORTED_MODULE_3__["default"]
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get(name) {
     return repositories[name];
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/repositories/addressRepository.js":
+/*!********************************************************!*\
+  !*** ./resources/js/repositories/addressRepository.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clients/axiosClient */ "./resources/js/repositories/clients/axiosClient.js");
+
+var resource = "/addresses";
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getList: function getList(payload) {
+    return _clients_axiosClient__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource), {
+      params: payload
+    });
   }
 });
 
@@ -48708,6 +49081,24 @@ var actions = {
           }
         }
       }, _callee);
+    }))();
+  },
+  testNow: function testNow(_ref2) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref2.commit;
+              console.log("now");
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
     }))();
   }
 }; // Mutations

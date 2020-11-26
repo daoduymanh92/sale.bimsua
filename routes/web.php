@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+// Route::get('/test', 'IndexController@test');
 Route::get('/{any}', 'IndexController@home')->where('any', '.*');
