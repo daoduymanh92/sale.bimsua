@@ -1,7 +1,6 @@
 // require('./bootstrap');
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Vuex from "vuex";
 import VuePlyr from "vue-plyr";
 
 // The second argument is optional and sets the default config values for every player.
@@ -12,7 +11,6 @@ Vue.use(VuePlyr, {
     emit: ["ended"]
 });
 
-Vue.use(Vuex);
 Vue.use(VueRouter);
 
 import App from "./pages/App";
@@ -65,5 +63,6 @@ const app = new Vue({
     el: "#app",
     components: { App },
     router,
-    store // Vuex,
+    store, // Vuex,
+    render: h => h(App)
 });

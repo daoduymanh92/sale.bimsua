@@ -368,17 +368,15 @@ export default {
             cities: []
         };
     },
-    mounted() {
-        // this.get_cities();
-    },
+    mounted() {},
     computed: {
         product_length: function() {
             return this.products.length;
         }
     },
     methods: {
-        get_cities: () => {
-            this.$store.modules.post.dispatch("testNow");
+        async get_cities() {
+            await this.$store.dispatch("post/TEST_NOW");
         },
         create_order: async order => {
             let response = await OrderRepository.create(order);
