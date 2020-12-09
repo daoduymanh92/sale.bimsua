@@ -2797,6 +2797,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2844,13 +2861,19 @@ var AddressRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE
         weight: 0.1,
         quantity: 1
       }],
-      cities: []
+      district: [],
+      ward: []
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.get_cities();
+  },
   computed: {
     product_length: function product_length() {
       return this.products.length;
+    },
+    cities: function cities() {
+      return this.$store.state.address.cities;
     }
   },
   methods: {
@@ -2863,7 +2886,7 @@ var AddressRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$store.dispatch("post/TEST_NOW");
+                return _this.$store.dispatch("address/getCities");
 
               case 2:
               case "end":
@@ -2872,6 +2895,26 @@ var AddressRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE
           }
         }, _callee);
       }))();
+    },
+    changeCity: function changeCity(event) {
+      var _this2 = this;
+
+      var citi_id = event.target.value;
+      AddressRepository.getList({
+        parentId: citi_id
+      }).then(function (res) {
+        _this2.district = res.data.data;
+      });
+    },
+    changeDistrict: function changeDistrict(event) {
+      var _this3 = this;
+
+      var district_id = event.target.value;
+      AddressRepository.getList({
+        parentId: district_id
+      }).then(function (res) {
+        _this3.ward = res.data.data;
+      });
     },
     create_order: function () {
       var _create_order = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(order) {
@@ -27284,7 +27327,7 @@ var render = function() {
       _c("div", { staticClass: "grid grid-cols-2 gap-4" }, [
         _c("div", { staticClass: "rounded-lg border-red-500" }, [
           _c("h1", { staticClass: "font-bold" }, [
-            _vm._v("Thông tin đơn hàng " + _vm._s(_vm.cities))
+            _vm._v("Thông tin đơn hàng")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "grid grid-cols-3 my-1" }, [
@@ -27386,28 +27429,53 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "inline col-span-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.order.province,
-                    expression: "order.province"
-                  }
-                ],
-                staticClass:
-                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-                attrs: { type: "text", placeholder: "" },
-                domProps: { value: _vm.order.province },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.province,
+                      expression: "order.province"
                     }
-                    _vm.$set(_vm.order, "province", $event.target.value)
+                  ],
+                  staticClass:
+                    "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.order,
+                          "province",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.changeCity($event)
+                      }
+                    ]
                   }
-                }
-              })
+                },
+                _vm._l(_vm.cities, function(city) {
+                  return _c(
+                    "option",
+                    { key: city.id, domProps: { value: city.id } },
+                    [_vm._v(_vm._s(city.alias))]
+                  )
+                }),
+                0
+              )
             ])
           ]),
           _vm._v(" "),
@@ -27417,28 +27485,53 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "inline col-span-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.order.district,
-                    expression: "order.district"
-                  }
-                ],
-                staticClass:
-                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-                attrs: { type: "text", placeholder: "" },
-                domProps: { value: _vm.order.district },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.district,
+                      expression: "order.district"
                     }
-                    _vm.$set(_vm.order, "district", $event.target.value)
+                  ],
+                  staticClass:
+                    "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.order,
+                          "district",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.changeDistrict($event)
+                      }
+                    ]
                   }
-                }
-              })
+                },
+                _vm._l(_vm.district, function(district) {
+                  return _c(
+                    "option",
+                    { key: district.id, domProps: { value: district.id } },
+                    [_vm._v(_vm._s(district.alias))]
+                  )
+                }),
+                0
+              )
             ])
           ]),
           _vm._v(" "),
@@ -27448,28 +27541,48 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "inline col-span-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.order.ward,
-                    expression: "order.ward"
-                  }
-                ],
-                staticClass:
-                  "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
-                attrs: { type: "text", placeholder: "" },
-                domProps: { value: _vm.order.ward },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.order.ward,
+                      expression: "order.ward"
                     }
-                    _vm.$set(_vm.order, "ward", $event.target.value)
+                  ],
+                  staticClass:
+                    "w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.order,
+                        "ward",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
                   }
-                }
-              })
+                },
+                _vm._l(_vm.ward, function(ward) {
+                  return _c(
+                    "option",
+                    { key: ward.id, domProps: { value: ward.id } },
+                    [_vm._v(_vm._s(ward.alias))]
+                  )
+                }),
+                0
+              )
             ])
           ]),
           _vm._v(" "),
@@ -27973,21 +28086,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(3),
           _vm._v(" "),
-          _c("div", { staticClass: "grid grid-cols-1 my-1 mt-8" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "w-full p-1 bg-yellow-400 rounded font-bold text-black",
-                on: { click: _vm.get_cities }
-              },
-              [
-                _vm._v(
-                  "\n                        Tạo đơn\n                    "
-                )
-              ]
-            )
-          ])
+          _vm._m(4)
         ])
       ])
     ])
@@ -28059,6 +28158,20 @@ var staticRenderFns = [
           attrs: { type: "text", placeholder: "" }
         })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid grid-cols-1 my-1 mt-8" }, [
+      _c(
+        "button",
+        {
+          staticClass: "w-full p-1 bg-yellow-400 rounded font-bold text-black"
+        },
+        [_vm._v("\n                        Tạo đơn\n                    ")]
+      )
     ])
   }
 ]
@@ -48895,10 +49008,10 @@ var resource = "/addresses";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var baseDomain = process.env.MIX_ROOT_API;
+var baseDomain = "http://127.0.0.1:8000/api/";
 var baseURL = "".concat(baseDomain); // Incase of /api/v1;
 // ALL DEFUALT CONFIGURATION HERE
 
@@ -48907,7 +49020,6 @@ var baseURL = "".concat(baseDomain); // Incase of /api/v1;
   headers: {// "Authorization": "Bearer xxxxx"
   }
 }));
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -49027,6 +49139,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/post */ "./resources/js/store/modules/post.js");
+/* harmony import */ var _modules_address__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/address */ "./resources/js/store/modules/address.js");
+
 
 
 
@@ -49034,9 +49148,84 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var debug = "development" !== "production";
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    post: _modules_post__WEBPACK_IMPORTED_MODULE_2__["default"]
+    post: _modules_post__WEBPACK_IMPORTED_MODULE_2__["default"],
+    address: _modules_address__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/address.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/address.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../repositories/RepositoryFactory */ "./resources/js/repositories/RepositoryFactory.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/* Module1.store.js */
+
+var AddressRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["default"].get("addresses"); // State object
+
+var state = {
+  cities: [],
+  variable2: 2,
+  variable3: 3
+}; // Getter functions
+
+var getters = {}; // Actions
+
+var actions = {
+  getCities: function getCities(_ref) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var commit, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return AddressRepository.getList({});
+
+            case 3:
+              response = _context.sent;
+              commit("SET_CITIES", response.data.data);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+}; // Mutations
+
+var mutations = {
+  SET_CITIES: function SET_CITIES(state, data) {
+    state.cities = data;
+  },
+  SET_VARIABLE_2: function SET_VARIABLE_2(state, data) {
+    state.variable2 = data;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 
@@ -49151,8 +49340,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/sale.bimsua/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/sale.bimsua/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Development\sale.bimsua\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Development\sale.bimsua\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

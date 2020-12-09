@@ -18,8 +18,9 @@ class AddressController extends Controller
     }
     //
     public function getList(Request $request) {  
+        $param = $request->all();
         $addressService = new AddressService;
-        $data = $addressService->getList();
+        $data = $addressService->getList($param);
         return $this->returnSucess($data);       
     }
 }

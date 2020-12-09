@@ -3,7 +3,7 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-2 gap-4">
                 <div class="rounded-lg border-red-500">
-                    <h1 class="font-bold">Thông tin đơn hàng {{ cities }}</h1>
+                    <h1 class="font-bold">Thông tin đơn hàng</h1>
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1">Số điện thoại</div>
                         <div class="inline col-span-2">
@@ -40,34 +40,52 @@
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1">Thành phố</div>
                         <div class="inline col-span-2">
-                            <input
-                                v-model="order.province"
-                                type="text"
-                                placeholder=""
+                            <select
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
-                            />
+                                v-model="order.province"
+                                @change="changeCity($event)"
+                            >
+                                <option
+                                    v-for="city in cities"
+                                    :key="city.id"
+                                    :value="city.id"
+                                    >{{ city.alias }}</option
+                                >
+                            </select>
                         </div>
                     </div>
+
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1">Quận huyện</div>
                         <div class="inline col-span-2">
-                            <input
-                                v-model="order.district"
-                                type="text"
-                                placeholder=""
+                            <select
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
-                            />
+                                v-model="order.district"
+                                @change="changeDistrict($event)"
+                            >
+                                <option
+                                    v-for="district in district"
+                                    :key="district.id"
+                                    :value="district.id"
+                                    >{{ district.alias }}</option
+                                >
+                            </select>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 my-1">
                         <div class="inline col-span-1">Phường xã</div>
                         <div class="inline col-span-2">
-                            <input
-                                v-model="order.ward"
-                                type="text"
-                                placeholder=""
+                            <select
                                 class="w-full p-1 border rounded border-gray-500 focus:border-blue-500 hover:border-blue-500 focus:outline-none"
-                            />
+                                v-model="order.ward"
+                            >
+                                <option
+                                    v-for="ward in ward"
+                                    :key="ward.id"
+                                    :value="ward.id"
+                                    >{{ ward.alias }}</option
+                                >
+                            </select>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 my-1">
@@ -302,7 +320,6 @@
                     <div class="grid grid-cols-1 my-1 mt-8">
                         <button
                             class="w-full p-1 bg-yellow-400 rounded font-bold text-black"
-                            v-on:click="get_cities"
                         >
                             Tạo đơn
                         </button>
@@ -365,18 +382,40 @@ export default {
                     quantity: 1
                 }
             ],
-            cities: []
+            district: [],
+            ward: []
         };
     },
-    mounted() {},
+    mounted() {
+        this.get_cities();
+    },
     computed: {
         product_length: function() {
             return this.products.length;
+        },
+        cities() {
+            return this.$store.state.address.cities;
         }
     },
     methods: {
         async get_cities() {
-            await this.$store.dispatch("post/TEST_NOW");
+            await this.$store.dispatch("address/getCities");
+        },
+        changeCity(event) {
+            let citi_id = event.target.value;
+            AddressRepository.getList({
+                parentId: citi_id
+            }).then(res => {
+                this.district = res.data.data;
+            });
+        },
+        changeDistrict(event) {
+            let district_id = event.target.value;
+            AddressRepository.getList({
+                parentId: district_id
+            }).then(res => {
+                this.ward = res.data.data;
+            });
         },
         create_order: async order => {
             let response = await OrderRepository.create(order);

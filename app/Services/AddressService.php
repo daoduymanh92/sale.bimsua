@@ -15,8 +15,8 @@ class AddressService
    {
       
    }
-    public function getList() {
-        $response = Http::get('https://khachhang.giaohangtietkiem.vn/khach-hang/services/list-dia-chi');
+    public function getList($query) {
+        $response = Http::get('https://khachhang.giaohangtietkiem.vn/khach-hang/services/list-dia-chi', $query);
         if($response->status() == 200) {
             return $response->json();
         } else {
